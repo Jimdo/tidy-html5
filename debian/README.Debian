@@ -1,0 +1,7 @@
+tidy documentation can be found in the tidy-doc package.
+also see tidy manpage.
+
+config file is /etc/tidy.conf or ~/.tidyrc
+
+--
+Jason Thomas
