@@ -119,9 +119,8 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
                  !cfgBool(doc, TidyHtmlOut);
     Bool html4 = dtmode == TidyDoctypeStrict || dtmode == TidyDoctypeLoose || VERS_FROM40 & dtver;
 
-    // don't mess with <!doctype html>
-    if (HT50) return HT50;
-    if (XH50) return XH50;
+    if (xhtml && dtver == VERS_UNKNOWN) return XH50;
+    if (dtver == VERS_UNKNOWN) return HT50;
 
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {
@@ -1408,10 +1407,10 @@ Bool TY_(AddGenerator)( TidyDocImpl* doc )
     if (head)
     {
 #ifdef PLATFORM_NAME
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for "PLATFORM_NAME" %s",
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for HTML5 (experimental) for "PLATFORM_NAME" %s",
                          tidyReleaseDate());
 #else
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy %s", tidyReleaseDate());
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for HTML5 (experimental) %s", tidyReleaseDate());
 #endif
 
         for ( node = head->content; node; node = node->next )
@@ -1577,6 +1576,12 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
 
     switch(dtmode)
     {
+    case TidyDoctypeHtml5:
+        /* HTML5 */
+        TY_(RepairAttrValue)(doc, doctype, pub, NULL);
+        TY_(RepairAttrValue)(doc, doctype, sys, NULL);
+        lexer->versionEmitted = XH50;
+        break;
     case TidyDoctypeStrict:
         /* XHTML 1.0 Strict */
         TY_(RepairAttrValue)(doc, doctype, pub, GetFPIFromVers(X10S));
@@ -1595,7 +1600,11 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
         TY_(RepairAttrValue)(doc, doctype, sys, "");
         break;
     case TidyDoctypeAuto:
-        if (lexer->versions & XH11 && lexer->doctype == XH11)
+        if (lexer->doctype == VERS_UNKNOWN) {
+          lexer->versionEmitted = XH50;
+          return yes;
+        }
+        else if (lexer->versions & XH11 && lexer->doctype == XH11)
         {
             if (!TY_(GetAttrByName)(doctype, sys))
                 TY_(RepairAttrValue)(doc, doctype, sys, GetSIFromVers(XH11));
@@ -1632,10 +1641,6 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
             TY_(RepairAttrValue)(doc, doctype, pub, GetFPIFromVers(X10T));
             TY_(RepairAttrValue)(doc, doctype, sys, GetSIFromVers(X10T));
             lexer->versionEmitted = X10T;
-        }
-        else if (lexer->versions & XH50)
-        {
-            lexer->versionEmitted = XH50;
         }
         else
         {
@@ -1693,6 +1698,9 @@ Bool TY_(FixDocType)( TidyDocImpl* doc )
 
     switch (dtmode)
     {
+    case TidyDoctypeHtml5:
+        guessed = HT50;
+        break;
     case TidyDoctypeStrict:
         guessed = H41S;
         break;

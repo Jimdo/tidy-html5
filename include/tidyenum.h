@@ -112,6 +112,7 @@ typedef enum
   TidyQuiet,           /**< No 'Parsing X', guessed DTD or summary */
   TidyIndentContent,   /**< Indent content of appropriate tags */
                        /**< "auto" does text/block level content indentation */
+  TidyCoerceEndTags,   /**< Coerce end tags from start tags where probably intended */
   TidyHideEndTags,     /**< Suppress optional end tags */
   TidyXmlTags,         /**< Treat input as XML */
   TidyXmlOut,          /**< Create output as XML */
@@ -126,6 +127,7 @@ typedef enum
   TidyLogicalEmphasis, /**< Replace i by em and b by strong */
   TidyDropPropAttrs,   /**< Discard proprietary attributes */
   TidyDropFontTags,    /**< Discard presentation tags */
+  TidyDropEmptyElems,  /**< Discard empty elements */
   TidyDropEmptyParas,  /**< Discard empty p elements */
   TidyFixComments,     /**< Fix comments with adjacent hyphens */
   TidyBreakBeforeBR,   /**< Output newline before <br> or not? */
@@ -198,6 +200,7 @@ typedef enum
 #else
   TidyPunctWrapNotUsed,
 #endif
+  TidyMergeEmphasis,       /**< Merge nested B and I elements */
   TidyMergeDivs,       /**< Merge multiple DIVs */
   TidyDecorateInferredUL,  /**< Mark inferred UL elements with no indent CSS */
   TidyPreserveEntities,    /**< Preserve entities */
@@ -240,6 +243,7 @@ typedef enum
 */
 typedef enum
 {
+    TidyDoctypeHtml5,   /**< <!DOCTYPE html> */
     TidyDoctypeOmit,    /**< Omit DOCTYPE altogether */
     TidyDoctypeAuto,    /**< Keep DOCTYPE in input.  Set version to content */
     TidyDoctypeStrict,  /**< Convert document to HTML 4 strict content model */

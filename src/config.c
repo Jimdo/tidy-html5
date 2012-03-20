@@ -136,6 +136,7 @@ static const ctmbstr newlinePicks[] =
 
 static const ctmbstr doctypePicks[] = 
 {
+  "html5",
   "omit",
   "auto",
   "strict",
@@ -206,7 +207,7 @@ static ParseProperty ParseSorter;
 static ParseProperty ParseCharEnc;
 static ParseProperty ParseNewline;
 
-/* omit | auto | strict | loose | <fpi> */
+/* html5 | omit | auto | strict | loose | <fpi> */
 static ParseProperty ParseDocType;
 
 /* keep-first or keep-last? */
@@ -238,6 +239,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyShowWarnings,            DG, "show-warnings",               BL, yes,             ParseBool,         boolPicks       },
   { TidyQuiet,                   MS, "quiet",                       BL, no,              ParseBool,         boolPicks       },
   { TidyIndentContent,           PP, "indent",                      IN, TidyNoState,     ParseAutoBool,     autoBoolPicks   },
+  { TidyCoerceEndTags,           MU, "coerce-endtags",              BL, yes,             ParseBool,         boolPicks       },
   { TidyHideEndTags,             MU, "hide-endtags",                BL, no,              ParseBool,         boolPicks       },
   { TidyXmlTags,                 MU, "input-xml",                   BL, no,              ParseBool,         boolPicks       },
   { TidyXmlOut,                  MU, "output-xml",                  BL, no,              ParseBool,         boolPicks       },
@@ -251,6 +253,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyLogicalEmphasis,         MU, "logical-emphasis",            BL, no,              ParseBool,         boolPicks       },
   { TidyDropPropAttrs,           MU, "drop-proprietary-attributes", BL, no,              ParseBool,         boolPicks       },
   { TidyDropFontTags,            MU, "drop-font-tags",              BL, no,              ParseBool,         boolPicks       },
+  { TidyDropEmptyElems,          MU, "drop-empty-elements",         BL, yes,             ParseBool,         boolPicks       },
   { TidyDropEmptyParas,          MU, "drop-empty-paras",            BL, yes,             ParseBool,         boolPicks       },
   { TidyFixComments,             MU, "fix-bad-comments",            BL, yes,             ParseBool,         boolPicks       },
   { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParseBool,         boolPicks       },
@@ -309,6 +312,7 @@ static const TidyOptionImpl option_defs[] =
 #if SUPPORT_ASIAN_ENCODINGS
   { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParseBool,         boolPicks       },
 #endif
+  { TidyMergeEmphasis,           MU, "merge-emphasis",              BL, yes,             ParseBool,         boolPicks       },
   { TidyMergeDivs,               MU, "merge-divs",                  IN, TidyAutoState,   ParseAutoBool,     autoBoolPicks   },
   { TidyDecorateInferredUL,      MU, "decorate-inferred-ul",        BL, no,              ParseBool,         boolPicks       },
   { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParseBool,         boolPicks       },
@@ -1431,7 +1435,7 @@ ctmbstr TY_(CharEncodingOptName)( int encoding )
 }
 
 /*
-   doctype: omit | auto | strict | loose | <fpi>
+   doctype: html5 | omit | auto | strict | loose | <fpi>
 
    where the fpi is a string similar to
 
@@ -1468,6 +1472,8 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     if ( TY_(tmbstrcasecmp)(buf, "auto") == 0 )
         dtmode = TidyDoctypeAuto;
+    else if ( TY_(tmbstrcasecmp)(buf, "html5") == 0 )
+        dtmode = TidyDoctypeHtml5;
     else if ( TY_(tmbstrcasecmp)(buf, "omit") == 0 )
         dtmode = TidyDoctypeOmit;
     else if ( TY_(tmbstrcasecmp)(buf, "strict") == 0 )
