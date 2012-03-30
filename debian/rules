@@ -7,6 +7,9 @@ include /usr/share/cdbs/1/rules/simple-patchsys.mk
 DOCDIR=htmldoc
 HELPXML=$(DOCDIR)/tidy-help.xml
 
+makebuilddir/tidy::
+	sh build/gnuauto/setup.sh
+
 build/tidy::
 	## Generate manpage from tidy output
 	LD_LIBRARY_PATH=$(CURDUR)/src/.libs/ \
