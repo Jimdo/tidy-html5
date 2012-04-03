@@ -1,16 +1,16 @@
 #! /usr/bin/make -f
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
-include /usr/share/cdbs/1/rules/simple-patchsys.mk
+#include /usr/share/cdbs/1/rules/simple-patchsys.mk
 
 
 DOCDIR=htmldoc
 HELPXML=$(DOCDIR)/tidy-help.xml
 
-makebuilddir/tidy::
+makebuilddir/tidy-html5::
 	sh build/gnuauto/setup.sh
 
-build/tidy::
+build/tidy-html5::
 	## Generate manpage from tidy output
 	LD_LIBRARY_PATH=$(CURDUR)/src/.libs/ \
 		$(CURDIR)/console/tidy -xml-help > $(HELPXML)

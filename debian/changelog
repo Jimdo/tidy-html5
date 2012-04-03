@@ -1,3 +1,10 @@
+tidy-html5 (20080116cvs-2.jimdo1) unstable; urgency=low
+
+  * Jimdo build
+  * renamed to tidy-html5
+
+ -- buildmaster <builds@jimdo.com>  Fri, 30 Mar 2012 19:32:55 +0200
+
 tidy (20080116cvs-2) unstable; urgency=low
 
   * debian/control: build depends on xsltproc
