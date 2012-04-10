@@ -1,3 +1,29 @@
+tidy-html5 (20080116cvs-2.jimdo5) unstable; urgency=low
+
+  * libtidy-0.100
+  * symlink libtidy-0.99.0.so to libtidy.so
+  * start playing with source format 3.0 (git)
+
+ -- buildmaster <builds@jimdo.com>  Tue, 10 Apr 2012 13:01:48 +0200
+
+tidy-html5 (20080116cvs-2.jimdo4) unstable; urgency=low
+
+  * tune Conflicts: again
+
+ -- buildmaster <builds@jimdo.com>  Thu, 05 Apr 2012 12:28:14 +0200
+
+tidy-html5 (20080116cvs-2.jimdo3) unstable; urgency=low
+
+  * tune Conflicts: field
+
+ -- buildmaster <builds@jimdo.com>  Thu, 05 Apr 2012 12:21:32 +0200
+
+tidy-html5 (20080116cvs-2.jimdo2) unstable; urgency=low
+
+  * libtidy version bump
+
+ -- buildmaster <builds@jimdo.com>  Tue, 03 Apr 2012 20:16:28 +0200
+
 tidy-html5 (20080116cvs-2.jimdo1) unstable; urgency=low
 
   * Jimdo build

@@ -29,7 +29,7 @@ Package: libtidy-html5
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}
-Conflicts: libtidy0, libtidy-0.99-0
+Conflicts: libtidy0, libtidy-0.99-0 (<= 20091223cvs-1.2)
 Description: HTML syntax checker and reformatter - library
  Corrects markup in a way compliant with the latest standards, and
  optimal for the popular browsers.  It has a comprehensive knowledge
