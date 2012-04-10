@@ -19,3 +19,22 @@ build/tidy-html5::
 clean::
 	## Clean up generated manpage
 	rm -f debian/tidy.1
+	rm -f       Makefile.am
+	rm -f       Makefile.in
+	rm -f       aclocal.m4
+	rm -f       config.guess
+	rm -f       config.sub
+	rm -f       configure
+	rm -f       configure.in
+	rm -f       console/Makefile.am
+	rm -f       console/Makefile.in
+	rm -f       depcomp
+	rm -f       include/Makefile.am
+	rm -f       include/Makefile.in
+	rm -f       install-sh
+	rm -f       ltmain.sh
+	rm -f       missing
+	rm -f       readme.txt
+	rm -f       setup.sh
+	rm -f       src/Makefile.am
+	rm -f       src/Makefile.in

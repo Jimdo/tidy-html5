@@ -1,3 +1,9 @@
+tidy-html5 (20080116cvs-2.jimdo6) unstable; urgency=low
+
+  * clean better
+
+ -- buildmaster <builds@jimdo.com>  Tue, 10 Apr 2012 14:53:26 +0200
+
 tidy-html5 (20080116cvs-2.jimdo5) unstable; urgency=low
 
   * libtidy-0.100
