@@ -1,3 +1,9 @@
+tidy-html5 (20080116cvs-2.jimdo7) unstable; urgency=low
+
+  * fix for javascript CDATA sections (https://github.com/w3c/tidy-html5/pull/15)
+
+ -- buildmaster <builds@jimdo.com>  Wed, 18 Apr 2012 15:36:16 +0200
+
 tidy-html5 (20080116cvs-2.jimdo6) unstable; urgency=low
 
   * clean better
