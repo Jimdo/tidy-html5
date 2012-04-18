@@ -1,3 +1,9 @@
+tidy-html5 (20080116cvs-2.jimdo8) unstable; urgency=low
+
+  * use // for comments as it was in the old lib
+
+ -- buildmaster <builds@jimdo.com>  Wed, 18 Apr 2012 16:19:26 +0200
+
 tidy-html5 (20080116cvs-2.jimdo7) unstable; urgency=low
 
   * fix for javascript CDATA sections (https://github.com/w3c/tidy-html5/pull/15)
