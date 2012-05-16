@@ -1191,7 +1191,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
             attribute->attrchk( doc, node, attval );
     }
 
-    if (AttributeIsProprietary(node, attval))
+    if (AttributeIsProprietary(node, attval) && !(nodeIsEMBED(node) && !strchr(attval->attribute, ':')))
     {
         TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
 
