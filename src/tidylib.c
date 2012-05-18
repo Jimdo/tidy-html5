@@ -1324,7 +1324,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         if (xhtmlOut && !htmlOut)
         {
             TY_(SetXHTMLDocType)(doc);
-            TY_(FixAnchors)(doc, &doc->root, wantNameAttr, yes);
+            TY_(FixAnchors)(doc, &doc->root, wantNameAttr, no);
             TY_(FixXhtmlNamespace)(doc, yes);
             TY_(FixLanguageInformation)(doc, &doc->root, yes, yes);
         }
